@@ -1,3 +1,5 @@
+*.o
+*.out
 *.un~
 .idea/
 __pycache__/
