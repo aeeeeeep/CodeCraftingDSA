@@ -48,13 +48,12 @@ public:
     }
 
     // 读栈顶操作
-    int GetTop(T& e) {
+    int GetTop() {
         if (top == nullptr) {
             cout << "栈为空，无法读取栈顶元素！" << endl;
             return -1;
         }
-        e = top->data;
-        return 0;
+        return top->data;
     }
 
     // 判空操作
@@ -63,30 +62,3 @@ public:
     }
 };
 
-int main() {
-    LinkStack<int> stack;
-    stack.Push(1);
-    stack.Push(2);
-    stack.Push(3);
-
-    int topElement;
-    stack.GetTop(topElement);
-    cout << "栈顶元素为: " << topElement << endl;
-
-    int poppedElement;
-    stack.Pop(poppedElement);
-    cout << "出栈元素为: " << poppedElement << endl;
-    stack.Pop(poppedElement);
-    cout << "出栈元素为: " << poppedElement << endl;
-    stack.Pop(poppedElement);
-    cout << "出栈元素为: " << poppedElement << endl;
-
-    cout << stack.GetTop(topElement) << endl;
-    if (stack.Empty()) {
-        cout << "栈为空" << endl;
-    } else {
-        cout << "栈非空" << endl;
-    }
-
-    return 0;
-}

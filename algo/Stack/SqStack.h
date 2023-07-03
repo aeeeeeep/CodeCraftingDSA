@@ -1,12 +1,12 @@
 #include <iostream>
 #include "Stack.h"
-const int MAX_SIZE = 100;  // 栈的最大容量
 
 using namespace std;
 
 template <typename T>
 class SqStack : public Stack<T> {
 private:
+    static const int MAX_SIZE = 100;  // 栈的最大容量
     T data[MAX_SIZE];  // 栈的存储空间
     int top;           // 栈顶指针
 
@@ -40,13 +40,12 @@ public:
     }
 
     // 读栈顶操作
-    int GetTop(T& e) {
+    int GetTop() {
         if (top == -1) {
             cout << "栈为空，无法读取栈顶元素！" << endl;
             return -1;
         }
-        e = data[top];
-        return 0;
+        return data[top];
     }
 
     // 判空操作
@@ -54,31 +53,3 @@ public:
         return (top == -1);
     }
 };
-
-int main() {
-    SqStack<int> stack;
-    stack.Push(1);
-    stack.Push(2);
-    stack.Push(3);
-
-    int topElement;
-    stack.GetTop(topElement);
-    cout << "栈顶元素为: " << topElement << endl;
-
-    int poppedElement;
-    stack.Pop(poppedElement);
-    cout << "出栈元素为: " << poppedElement << endl;
-    stack.Pop(poppedElement);
-    cout << "出栈元素为: " << poppedElement << endl;
-    stack.Pop(poppedElement);
-    cout << "出栈元素为: " << poppedElement << endl;
-
-    cout << stack.GetTop(topElement) << endl;
-    if (stack.Empty()) {
-        cout << "栈为空" << endl;
-    } else {
-        cout << "栈非空" << endl;
-    }
-
-    return 0;
-}

@@ -19,7 +19,7 @@ public:
     virtual void Pop(T& e) = 0;
 
     // 读栈顶操作
-    virtual int GetTop(T& e) = 0;
+    virtual int GetTop() = 0;
 
     // 判空操作
     virtual bool Empty() = 0;
