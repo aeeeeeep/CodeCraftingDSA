@@ -3,40 +3,44 @@
 using namespace std;
 
 template <typename T>
-class LinkList : public List<T> {
+class CDLinkList : public List<T> {
 private:
-    struct Node {
+    struct CDNode {
         T data;
-        Node* next;
+        CDNode* prev;
+        CDNode* next;
     };
 
-    Node* head;  // 头指针
+    CDNode* head;  // 头指针
 
 public:
     // 构造函数
-    LinkList() {
-        head = new Node();
-        head->next = nullptr;
+    CDLinkList() {
+        head = new CDNode();
+        head->next = head;
+        head->prev = head;
     }
 
     // 析构函数
-    ~LinkList() {
+    ~CDLinkList() {
         Clear();
     }
 
     // 清空链表
     void Clear() {
-        Node* current = head->next;
-        while (current != nullptr) {
-            Node* next = current->next;
+        CDNode* current = head->next;
+        while (current != head) {
+            CDNode* next = current->next;
             delete current;
             current = next;
         }
+        head->next = head;
+        head->prev = head;
     }
 
     // 重载[]运算符为GetElem函数操作
     T& operator[](int i) {
-        Node* current = head->next;
+        CDNode* current = head->next;
         for (int j = 0; j < i-1; j++) {
             current = current->next;
         }
@@ -45,46 +49,51 @@ public:
 
     // 插入操作
     void Insert(int i, const T& e) {
-        Node* newNode = new Node();
-        newNode->data = e;
+        CDNode* newCDNode = new CDNode();
+        newCDNode->data = e;
 
         if (i == 1) {
-            newNode->next = head->next;
-            head->next = newNode;
+            newCDNode->prev = head;
+            newCDNode->next = head->next;
+            head->prev = nullptr;
+            head->next = newCDNode;
         } else {
-            Node* current = head;
+            CDNode* current = head;
             for (int j = 0; j < i-1; j++) {
                 current = current->next;
             }
-            newNode->next = current->next;
-            current->next = newNode;
+            newCDNode->prev = current;
+            newCDNode->next = current->next;
+            current->next = newCDNode;
         }
     }
 
     // 删除操作
     void Delete(int i, T& e) {
         if (i == 1) {
-            Node* temp = head;
+            CDNode* temp = head->next;
             e = temp->data;
-            head = head->next;
+            head->next = temp->next;
+            temp->next->prev = head;
             delete temp;
         } else {
-            Node* current = head;
+            CDNode* current = head;
             for (int j = 0; j < i-1; j++) {
                 current = current->next;
             }
-            Node* temp = current->next;
+            CDNode* temp = current->next;
             e = temp->data;
             current->next = temp->next;
+            temp->next->prev = current;
             delete temp;
         }
     }
 
     // 按值查找操作
     int LocateElem(const T& e) {
-        Node* current = head->next;
+        CDNode* current = head->next;
         int i = 1;
-        while (current != nullptr) {
+        while (current != head) {
             if (current->data == e) {
                 return i;
             }
@@ -96,7 +105,7 @@ public:
 
     // 按位查找操作
     T GetElem(int i) {
-        Node* current = head->next;
+        CDNode* current = head->next;
         for (int j = 0; j < i-1; j++) {
             current = current->next;
         }
@@ -106,8 +115,8 @@ public:
     // 求表长
     int Length() {
         int length = 0;
-        Node* current = head->next;
-        while (current != nullptr) {
+        CDNode* current = head->next;
+        while (current != head) {
             length++;
             current = current->next;
         }
@@ -116,8 +125,8 @@ public:
 
     // 输出操作
     void Print() {
-        Node* current = head->next;
-        while (current != nullptr) {
+        CDNode* current = head->next;
+        while (current != head) {
             cout << current->data << " ";
             current = current->next;
         }
@@ -131,7 +140,7 @@ public:
 };
 
 int main() {
-    LinkList<int> L;
+    CDLinkList<int> L;
     L.Insert(1, 10);
     L.Insert(2, 20);
     L.Insert(3, 30);

@@ -36,4 +36,3 @@ public:
     // 判空操作
     virtual bool Empty() = 0;
 };
-

@@ -15,7 +15,10 @@ private:
 
 public:
     // 构造函数
-    DLinkList() : head(nullptr) {}
+    DLinkList() {
+        head = new DNode();
+        head->next = nullptr;
+    }
 
     // 析构函数
     ~DLinkList() {
@@ -24,18 +27,17 @@ public:
 
     // 清空链表
     void Clear() {
-        DNode* current = head;
+        DNode* current = head->next;
         while (current != nullptr) {
             DNode* next = current->next;
             delete current;
             current = next;
         }
-        head = nullptr;
     }
 
     // 重载[]运算符为GetElem函数操作
     T& operator[](int i) {
-        DNode* current = head;
+        DNode* current = head->next;
         for (int j = 0; j < i-1; j++) {
             current = current->next;
         }
@@ -48,15 +50,13 @@ public:
         newDNode->data = e;
 
         if (i == 1) {
-            newDNode->prev = nullptr;
-            newDNode->next = head;
-            if (head != nullptr) {
-                head->prev = newDNode;
-            }
-            head = newDNode;
+            newDNode->prev = head;
+            newDNode->next = head->next;
+            head->prev = nullptr;
+            head->next = newDNode;
         } else {
             DNode* current = head;
-            for (int j = 0; j < i-2; j++) {
+            for (int j = 0; j < i-1; j++) {
                 current = current->next;
             }
             newDNode->prev = current;
@@ -68,16 +68,13 @@ public:
     // 删除操作
     void Delete(int i, T& e) {
         if (i == 1) {
-            DNode* temp = head;
+            DNode* temp = head->next;
             e = temp->data;
-            head = head->next;
-            if (head != nullptr) {
-                head->prev = nullptr;
-            }
+            head->prev = nullptr;
             delete temp;
         } else {
             DNode* current = head;
-            for (int j = 0; j < i-2; j++) {
+            for (int j = 0; j < i-1; j++) {
                 current = current->next;
             }
             DNode* temp = current->next;
@@ -92,7 +89,7 @@ public:
 
     // 按值查找操作
     int LocateElem(const T& e) {
-        DNode* current = head;
+        DNode* current = head->next;
         int i = 1;
         while (current != nullptr) {
             if (current->data == e) {
@@ -106,7 +103,7 @@ public:
 
     // 按位查找操作
     T GetElem(int i) {
-        DNode* current = head;
+        DNode* current = head->next;
         for (int j = 0; j < i-1; j++) {
             current = current->next;
         }
@@ -116,7 +113,7 @@ public:
     // 求表长
     int Length() {
         int length = 0;
-        DNode* current = head;
+        DNode* current = head->next;
         while (current != nullptr) {
             length++;
             current = current->next;
@@ -126,7 +123,7 @@ public:
 
     // 输出操作
     void Print() {
-        DNode* current = head;
+        DNode* current = head->next;
         while (current != nullptr) {
             cout << current->data << " ";
             current = current->next;
