@@ -5,4 +5,6 @@
 __pycache__/
 .ccls-cache/
 .gdb_history
+peda-session-main.txt
+.gdb_history
 main
