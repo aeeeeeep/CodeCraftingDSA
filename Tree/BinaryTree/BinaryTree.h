@@ -1,16 +1,21 @@
+#pragma once
 #include <iostream>
 #include <queue>
 using namespace std;
 
 template <typename T>
+class CSTree;
+
+template <typename T>
 class BinaryTree {
+friend CSTree<T>;
 private:
     struct Node {
         T data;
         Node* left;
         Node* right;
     };
-
+    
     Node* root;  // 根节点
 
 public:
@@ -87,6 +92,10 @@ public:
     // 求节点总数
     size_t Count() {
         return countNodes(root);
+    }
+    
+    void setRoot(Node* node) {
+        this->root = node;
     }
 
 private:
