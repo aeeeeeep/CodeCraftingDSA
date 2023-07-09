@@ -1,17 +1,18 @@
 #include <iostream>
 #include "List.h"
+
 using namespace std;
 
-template <typename T>
+template<typename T>
 class CDLinkList : public List<T> {
 private:
     struct CDNode {
         T data;
-        CDNode* prev;
-        CDNode* next;
+        CDNode *prev;
+        CDNode *next;
     };
 
-    CDNode* head;  // 头指针
+    CDNode *head;  // 头指针
 
 public:
     // 构造函数
@@ -28,9 +29,9 @@ public:
 
     // 清空链表
     void Clear() {
-        CDNode* current = head->next;
+        CDNode *current = head->next;
         while (current != head) {
-            CDNode* next = current->next;
+            CDNode *next = current->next;
             delete current;
             current = next;
         }
@@ -39,17 +40,17 @@ public:
     }
 
     // 重载[]运算符为GetElem函数操作
-    T& operator[](int i) {
-        CDNode* current = head->next;
-        for (int j = 0; j < i-1; j++) {
+    T &operator[](int i) {
+        CDNode *current = head->next;
+        for (int j = 0; j < i - 1; j++) {
             current = current->next;
         }
         return current->data;
     }
 
     // 插入操作
-    void Insert(int i, const T& e) {
-        CDNode* newCDNode = new CDNode();
+    void Insert(int i, const T &e) {
+        CDNode *newCDNode = new CDNode();
         newCDNode->data = e;
 
         if (i == 1) {
@@ -58,8 +59,8 @@ public:
             head->prev = nullptr;
             head->next = newCDNode;
         } else {
-            CDNode* current = head;
-            for (int j = 0; j < i-1; j++) {
+            CDNode *current = head;
+            for (int j = 0; j < i - 1; j++) {
                 current = current->next;
             }
             newCDNode->prev = current;
@@ -69,19 +70,19 @@ public:
     }
 
     // 删除操作
-    void Delete(int i, T& e) {
+    void Delete(int i, T &e) {
         if (i == 1) {
-            CDNode* temp = head->next;
+            CDNode *temp = head->next;
             e = temp->data;
             head->next = temp->next;
             temp->next->prev = head;
             delete temp;
         } else {
-            CDNode* current = head;
-            for (int j = 0; j < i-1; j++) {
+            CDNode *current = head;
+            for (int j = 0; j < i - 1; j++) {
                 current = current->next;
             }
-            CDNode* temp = current->next;
+            CDNode *temp = current->next;
             e = temp->data;
             current->next = temp->next;
             temp->next->prev = current;
@@ -90,8 +91,8 @@ public:
     }
 
     // 按值查找操作
-    int LocateElem(const T& e) {
-        CDNode* current = head->next;
+    int LocateElem(const T &e) {
+        CDNode *current = head->next;
         int i = 1;
         while (current != head) {
             if (current->data == e) {
@@ -105,8 +106,8 @@ public:
 
     // 按位查找操作
     T GetElem(int i) {
-        CDNode* current = head->next;
-        for (int j = 0; j < i-1; j++) {
+        CDNode *current = head->next;
+        for (int j = 0; j < i - 1; j++) {
             current = current->next;
         }
         return current->data;
@@ -115,7 +116,7 @@ public:
     // 求表长
     int Length() {
         int length = 0;
-        CDNode* current = head->next;
+        CDNode *current = head->next;
         while (current != head) {
             length++;
             current = current->next;
@@ -125,7 +126,7 @@ public:
 
     // 输出操作
     void Print() {
-        CDNode* current = head->next;
+        CDNode *current = head->next;
         while (current != head) {
             cout << current->data << " ";
             current = current->next;

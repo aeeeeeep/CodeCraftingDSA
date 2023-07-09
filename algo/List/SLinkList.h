@@ -1,8 +1,9 @@
 #include <iostream>
 #include "List.h"
+
 using namespace std;
 
-template <typename T>
+template<typename T>
 class LinkList : public List<T> {
 private:
     static const int MAX_SIZE = 100;  // 最大容量
@@ -40,16 +41,16 @@ public:
     }
 
     // 重载[]运算符为GetElem函数操作
-    T& operator[](int i) {
+    T &operator[](int i) {
         int p = head;
-        for (int j = 0; j < i-1; j++) {
+        for (int j = 0; j < i - 1; j++) {
             p = nodes[p].next;
         }
         return nodes[p].data;
     }
 
     // 插入操作
-    void Insert(int i, const T& e) {
+    void Insert(int i, const T &e) {
         if (i < 1 || i > length + 1) {
             cout << "插入位置不合法" << endl;
             return;
@@ -78,7 +79,7 @@ public:
     }
 
     // 删除操作
-    void Delete(int i, T& e) {
+    void Delete(int i, T &e) {
         if (i < 1 || i > length) {
             cout << "删除位置不合法" << endl;
             return;
@@ -103,7 +104,7 @@ public:
     }
 
     // 按值查找操作
-    int LocateElem(const T& e) {
+    int LocateElem(const T &e) {
         int p = head;
         int i = 1;
         while (p != -1 && nodes[p].data != e) {

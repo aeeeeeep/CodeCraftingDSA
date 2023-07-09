@@ -4,17 +4,17 @@ using namespace std;
 
 int main() {
     vector<int> nums = {9, 5, 2, 7, 1, 8, 3};
-    cout<<"Raw Vector: ";
-    for (int num : nums) {
+    cout << "Raw Vector: ";
+    for (int num: nums) {
         cout << num << " ";
     }
-    cout<<endl;
+    cout << endl;
 
     // 冒泡排序
     vector<int> bubbleSortNums = nums;
     bubbleSort(bubbleSortNums);
     cout << "Bubble Sort: ";
-    for (int num : bubbleSortNums) {
+    for (int num: bubbleSortNums) {
         cout << num << " ";
     }
     cout << endl;
@@ -23,7 +23,7 @@ int main() {
     vector<int> selectionSortNums = nums;
     selectionSort(selectionSortNums);
     cout << "Selection Sort: ";
-    for (int num : selectionSortNums) {
+    for (int num: selectionSortNums) {
         cout << num << " ";
     }
     cout << endl;
@@ -32,7 +32,7 @@ int main() {
     vector<int> shellSortNums = nums;
     shellSort(shellSortNums);
     cout << "Shell Sort: ";
-    for (int num : shellSortNums) {
+    for (int num: shellSortNums) {
         cout << num << " ";
     }
     cout << endl;
@@ -41,7 +41,7 @@ int main() {
     vector<int> insertionSortNums = nums;
     insertionSort(insertionSortNums);
     cout << "Insertion Sort: ";
-    for (int num : insertionSortNums) {
+    for (int num: insertionSortNums) {
         cout << num << " ";
     }
     cout << endl;
@@ -50,7 +50,7 @@ int main() {
     vector<int> mergeSortNums = nums;
     mergeSort(mergeSortNums, 0, mergeSortNums.size() - 1);
     cout << "Merge Sort: ";
-    for (int num : mergeSortNums) {
+    for (int num: mergeSortNums) {
         cout << num << " ";
     }
     cout << endl;
@@ -59,7 +59,7 @@ int main() {
     vector<int> quickSortNums = nums;
     quickSort(quickSortNums, 0, quickSortNums.size() - 1);
     cout << "Quick Sort: ";
-    for (int num : quickSortNums) {
+    for (int num: quickSortNums) {
         cout << num << " ";
     }
     cout << endl;
@@ -68,7 +68,7 @@ int main() {
     vector<int> countingSortNums = nums;
     countingSort(countingSortNums, countingSortNums.size());
     cout << "Counting Sort: ";
-    for (int num : countingSortNums) {
+    for (int num: countingSortNums) {
         cout << num << " ";
     }
     cout << endl;
@@ -77,7 +77,7 @@ int main() {
     vector<int> radixSortNums = nums;
     radixSort(radixSortNums, radixSortNums.size());
     cout << "Radix Sort: ";
-    for (int num : radixSortNums) {
+    for (int num: radixSortNums) {
         cout << num << " ";
     }
     cout << endl;
@@ -86,7 +86,7 @@ int main() {
     vector<int> heapSortNums = nums;
     heapSort(heapSortNums);
     cout << "Heap Sort: ";
-    for (int num : heapSortNums) {
+    for (int num: heapSortNums) {
         cout << num << " ";
     }
     cout << endl;

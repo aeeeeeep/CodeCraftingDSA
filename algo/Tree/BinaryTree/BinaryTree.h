@@ -80,12 +80,12 @@ public:
     }
 
     // 求树的深度
-    int Depth() {
+    size_t Depth() {
         return calculateDepth(root);
     }
 
     // 求节点总数
-    int Count() {
+    size_t Count() {
         return countNodes(root);
     }
 
@@ -147,25 +147,25 @@ private:
     }
 
     // 计算树的深度递归函数
-    int calculateDepth(Node* node) {
+    size_t calculateDepth(Node* node) {
         if (node == nullptr) {
             return 0;
         }
 
-        int leftDepth = calculateDepth(node->left);
-        int rightDepth = calculateDepth(node->right);
+        size_t leftDepth = calculateDepth(node->left);
+        size_t rightDepth = calculateDepth(node->right);
 
         return max(leftDepth, rightDepth) + 1;
     }
 
     // 计算节点总数递归函数
-    int countNodes(Node* node) {
+    size_t countNodes(Node* node) {
         if (node == nullptr) {
             return 0;
         }
 
-        int leftCount = countNodes(node->left);
-        int rightCount = countNodes(node->right);
+        size_t leftCount = countNodes(node->left);
+        size_t rightCount = countNodes(node->right);
 
         return leftCount + rightCount + 1;
     }
@@ -179,8 +179,8 @@ private:
         return buildTreeFromPreAndInHelper(preorder, 0, preorder.length() - 1, inorder, 0, inorder.length() - 1);
     }
 
-    Node* buildTreeFromPreAndInHelper(const string& preorder, int preStart, int preEnd,
-                                      const string& inorder, int inStart, int inEnd) {
+    Node* buildTreeFromPreAndInHelper(const string& preorder, size_t preStart, size_t preEnd,
+                                      const string& inorder, size_t inStart, size_t inEnd) {
         if (preStart > preEnd || inStart > inEnd) {
             return nullptr;
         }
@@ -191,16 +191,16 @@ private:
         root->left = nullptr;
         root->right = nullptr;
 
-        int inIndex = 0;
-        for (int i = inStart; i <= inEnd; i++) {
+        size_t inIndex = 0;
+        for (size_t i = inStart; i <= inEnd; i++) {
             if (inorder[i] - '0' == rootValue) {
                 inIndex = i;
                 break;
             }
         }
 
-        int leftSubtreeSize = inIndex - inStart;
-        int rightSubtreeSize = inEnd - inIndex;
+        size_t leftSubtreeSize = inIndex - inStart;
+        size_t rightSubtreeSize = inEnd - inIndex;
 
         root->left = buildTreeFromPreAndInHelper(preorder, preStart + 1, preStart + leftSubtreeSize,
                                                  inorder, inStart, inIndex - 1);
@@ -220,8 +220,8 @@ private:
                                             postorder, 0, postorder.length() - 1);
     }
 
-    Node* buildTreeFromInAndPostHelper(const string& inorder, int inStart, int inEnd,
-                                       const string& postorder, int postStart, int postEnd) {
+    Node* buildTreeFromInAndPostHelper(const string& inorder, size_t inStart, size_t inEnd,
+                                       const string& postorder, size_t postStart, size_t postEnd) {
         if (inStart > inEnd || postStart > postEnd) {
             return nullptr;
         }
@@ -236,16 +236,16 @@ private:
             return root;
         }
 
-        int inIndex = 0;
-        for (int i = inStart; i <= inEnd; i++) {
+        size_t inIndex = 0;
+        for (size_t i = inStart; i <= inEnd; i++) {
             if (inorder[i] - '0' == rootValue) {
                 inIndex = i;
                 break;
             }
         }
 
-        int leftSubtreeSize = inIndex - inStart;
-        int rightSubtreeSize = inEnd - inIndex;
+        size_t leftSubtreeSize = inIndex - inStart;
+        size_t rightSubtreeSize = inEnd - inIndex;
 
         root->left = buildTreeFromInAndPostHelper(inorder, inStart, inIndex - 1,
                                                   postorder, postStart, postStart + leftSubtreeSize - 1);

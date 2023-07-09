@@ -19,104 +19,104 @@ using namespace std;
 */
 
 // 冒泡排序
-template <typename T>
-void bubbleSort(vector<T> &q) {
-    for(int i = q.size() - 1; i > 0; i--){
+template<typename T>
+void bubbleSort(vector <T> &q) {
+    for (size_t i = q.size() - 1; i > 0; i--) {
         bool flag = false;
-        for(int j = 0; j + 1 <= i; j++){
-            if(q[j] > q[j+1]){
-                swap(q[j], q[j+1]);
+        for (size_t j = 0; j + 1 <= i; j++) {
+            if (q[j] > q[j + 1]) {
+                swap(q[j], q[j + 1]);
                 flag = true;
             }
         }
-        if(!flag)
+        if (!flag)
             break;
     }
 }
 
 // 选择排序
-template <typename T>
-void selectionSort(vector<T> &q) {
-    for(int i = 0; i<q.size()-1; i++) {
-        for(int j = i+1; j<q.size(); j++) {
-            if(q[i] > q[j])
+template<typename T>
+void selectionSort(vector <T> &q) {
+    for (size_t i = 0; i < q.size() - 1; i++) {
+        for (size_t j = i + 1; j < q.size(); j++) {
+            if (q[i] > q[j])
                 swap(q[j], q[i]);
         }
     }
 }
 
 // 希尔排序
-template <typename T>
-void shellSort(vector<T> &q) {
-    int gap = q.size() / 2;
-    while(gap) {
-        for(int i = gap; i < q.size(); i += gap) {
-            int t = q[i], j;
-            for(j = i - gap; j >= 0; j -= gap) {
-                if(q[j] > t)
-                    q[j+gap] = q[j];
+template<typename T>
+void shellSort(vector <T> &q) {
+    size_t gap = q.size() / 2;
+    while (gap) {
+        for (size_t i = gap; i < q.size(); i += gap) {
+            size_t t = q[i], j;
+            for (j = i - gap; j >= 0; j -= gap) {
+                if (q[j] > t)
+                    q[j + gap] = q[j];
                 else
                     break;
             }
-            q[j+gap] = t;
+            q[j + gap] = t;
         }
         gap /= 2;
     }
 }
 
 // 插入排序
-template <typename T>
-void insertionSort(vector<T> &q) {
-    for(int i=1; i<q.size(); i++) {
+template<typename T>
+void insertionSort(vector <T> &q) {
+    for (size_t i = 1; i < q.size(); i++) {
         bool flag = false;
-        for(int j=0; j<i; j++) {
-            if(q[j] > q[i]) {
+        for (size_t j = 0; j < i; j++) {
+            if (q[j] > q[i]) {
                 swap(q[j], q[i]);
                 flag = true;
             }
         }
-        if(!flag)
+        if (!flag)
             break;
     }
 }
 
 // 归并排序
-template <typename T>
-void mergeSort(vector<T> &q, int l, int r) {
-    if(l >= r)
+template<typename T>
+void mergeSort(vector <T> &q, size_t l, size_t r) {
+    if (l >= r)
         return;
-    int mid = (l + r) >> 1;
+    size_t mid = (l + r) >> 1;
     mergeSort(q, l, mid);
     mergeSort(q, mid + 1, r);
-    static vector<int> w;
+    static vector <size_t> w;
     w.clear();
-    int i = l, j = mid + 1;
-    while(i <= mid && j <= r){
-        if(q[i] > q[j])
+    size_t i = l, j = mid + 1;
+    while (i <= mid && j <= r) {
+        if (q[i] > q[j])
             w.push_back(q[j++]);
         else
             w.push_back(q[i++]);
     }
-    while(i <= mid)
+    while (i <= mid)
         w.push_back(q[i++]);
-    while(j <= mid)
+    while (j <= mid)
         w.push_back(q[j++]);
-    for(int i : w)
+    for (size_t i: w)
         q[l++] = i;
 }
 
 // 快速排序
-template <typename T>
-void quickSort(vector<T> &q, int l, int r){
-    if(l >= r)
+template<typename T>
+void quickSort(vector <T> &q, size_t l, size_t r) {
+    if (l >= r)
         return;
-    int i = l - 1, j = r + 1, x = q[l + rand() % (r - l + 1)];
-    while(i < j){
-        do j--; while(q[j] > x);
-        do i++; while(q[i] < x);
-        if(i < j)
+    size_t i = l - 1, j = r + 1, x = q[l + rand() % (r - l + 1)];
+    while (i < j) {
+        do j--; while (q[j] > x);
+        do i++; while (q[i] < x);
+        if (i < j)
             swap(q[i], q[j]);
-        else{
+        else {
             quickSort(q, l, j);
             quickSort(q, j + 1, r);
         }
@@ -124,48 +124,48 @@ void quickSort(vector<T> &q, int l, int r){
 }
 
 // 计数排序
-template <typename T>
-void countingSort(vector<T> &q, int n){
-    vector<int> cnt(101, 0);
-    for(int i = 0; i < n; i++)
+template<typename T>
+void countingSort(vector <T> &q, size_t n) {
+    vector <size_t> cnt(101, 0);
+    for (size_t i = 0; i < n; i++)
         cnt[q[i]]++;
-    for(int i = 0, k = 0; i <= 100; i++){
-        while(cnt[i]){
+    for (size_t i = 0, k = 0; i <= 100; i++) {
+        while (cnt[i]) {
             q[k++] = i;
             cnt[i]--;
         }
     }
 }
 
-template <typename T>
-int get(T x, int i){
-    while(i--)
+template<typename T>
+size_t get(T x, size_t i) {
+    while (i--)
         x /= 10;
     return x % 10;
 }
 
 // 基数排序
-template <typename T>
-void radixSort(vector<T> &q, int n) {
-    vector<vector<int>> cnt(10);
-    for(int i = 0; i < 3; i++) {
-        for(int j = 0; j < 10; j++)
+template<typename T>
+void radixSort(vector <T> &q, size_t n) {
+    vector <vector<size_t>> cnt(10);
+    for (size_t i = 0; i < 3; i++) {
+        for (size_t j = 0; j < 10; j++)
             cnt[j].clear();
-        for(int j = 0; j < n; j++)
+        for (size_t j = 0; j < n; j++)
             cnt[get(q[j], i)].push_back(q[j]);
-        for(int j = 0, k = 0; j < 10; j++) {
-            for(int x : cnt[j])
+        for (size_t j = 0, k = 0; j < 10; j++) {
+            for (size_t x: cnt[j])
                 q[k++] = x;
         }
     }
 }
 
 // 推排序
-template <typename T>
-void heapify(vector<T>& q, int n, int i) {
-    int largest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
+template<typename T>
+void heapify(vector <T> &q, size_t n, size_t i) {
+    size_t largest = i;
+    size_t left = 2 * i + 1;
+    size_t right = 2 * i + 2;
 
     if (left < n && q[left] > q[largest])
         largest = left;
@@ -179,16 +179,17 @@ void heapify(vector<T>& q, int n, int i) {
     }
 }
 
-template <typename T>
-void heapSort(vector<T>& q) {
-    int n = q.size();
+template<typename T>
+void heapSort(vector <T> &q) {
+    size_t n = q.size();
 
     // 建立最大堆
-    for (int i = n / 2 - 1; i >= 0; i--)
+    for (size_t i = n / 2 - 1; i >= 0 && i != static_cast<size_t>(-1); i--) {
         heapify(q, n, i);
+    }
 
     // 逐步将最大元素移到末尾
-    for (int i = n - 1; i >= 0; i--) {
+    for (size_t i = n - 1; i >= 0 && i != static_cast<size_t>(-1); i--) {
         swap(q[0], q[i]);
         heapify(q, i, 0);
     }

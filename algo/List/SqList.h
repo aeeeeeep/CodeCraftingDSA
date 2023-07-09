@@ -1,11 +1,12 @@
 #include <iostream>
 #include "List.h"
+
 using namespace std;
 
-template <typename T>
-class SqList : public List<T>{
+template<typename T>
+class SqList : public List<T> {
 private:
-    T* data; // 存储数据的数组
+    T *data; // 存储数据的数组
     int length; // 线性表的长度
     int capacity; // 数组的容量
 
@@ -23,7 +24,7 @@ public:
     }
 
     // 重载[]运算符为GetElem函数操作
-    T& operator[](int i) {
+    T &operator[](int i) {
         if (i < 0 || i >= length) {
             cout << "位置错误" << endl;
             throw out_of_range("位置错误");
@@ -32,14 +33,14 @@ public:
     }
 
     // 插入操作
-    void Insert(int i, const T& e) {
+    void Insert(int i, const T &e) {
         if (i < 1 || i > length + 1) {
             cout << "插入位置错误" << endl;
             return;
         }
         if (length == capacity) {
             // 扩容
-            T* newData = new T[2 * capacity];
+            T *newData = new T[2 * capacity];
             for (int j = 0; j < length; j++) {
                 newData[j] = data[j];
             }
@@ -55,7 +56,7 @@ public:
     }
 
     // 删除操作
-    void Delete(int i, T& e) {
+    void Delete(int i, T &e) {
         if (i < 1 || i > length) {
             cout << "删除位置错误" << endl;
             return;
@@ -68,7 +69,7 @@ public:
     }
 
     // 按值查找操作
-    int LocateElem(const T& e) {
+    int LocateElem(const T &e) {
         for (int i = 0; i < length; i++) {
             if (data[i] == e) {
                 return i + 1;
