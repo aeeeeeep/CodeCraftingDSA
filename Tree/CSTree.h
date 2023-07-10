@@ -22,6 +22,22 @@ public:
     // 构造函数
     CSTree() : root(nullptr) {}
 
+    // 析构函数
+    ~CSTree() {
+        Clear(root);
+    }
+
+    // 清空二叉树    
+    void Clear(CSNode* node) {
+        if (node == nullptr) {
+            return;
+        }
+
+        Clear(node->firstChild);
+        Clear(node->nextSibling);
+        delete node;
+    }
+
     // 构造函数
     CSTree(const vector<T>& data, const vector<int>& parents) {
         buildTree(data, parents);

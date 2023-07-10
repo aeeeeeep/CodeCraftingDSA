@@ -24,6 +24,7 @@ public:
     // 析构函数
     ~LinkList() {
         Clear();
+        delete head;
     }
 
     // 清空链表

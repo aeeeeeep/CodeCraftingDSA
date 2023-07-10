@@ -25,6 +25,7 @@ public:
     // 析构函数
     ~DLinkList() {
         Clear();
+        delete head;
     }
 
     // 清空链表

@@ -30,6 +30,10 @@ public:
         nodes[MAX_SIZE - 1].next = -1;  // 最后一个节点的next为-1表示链表结束
     }
 
+    ~LinkList() {
+        Clear();
+    }
+
     // 清空链表
     void Clear() {
         length = 0;

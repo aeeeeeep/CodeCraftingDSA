@@ -52,12 +52,9 @@ void shellSort(vector <T> &q) {
     size_t gap = q.size() / 2;
     while (gap) {
         for (size_t i = gap; i < q.size(); i += gap) {
-            size_t t = q[i], j;
-            for (j = i - gap; j >= 0; j -= gap) {
-                if (q[j] > t)
-                    q[j + gap] = q[j];
-                else
-                    break;
+            T t = q[i], j;
+            for (j = i - gap; j >= 0 && q[j] > t; j -= gap) {
+                q[j + gap] = q[j];
             }
             q[j + gap] = t;
         }
@@ -108,20 +105,26 @@ void mergeSort(vector <T> &q, size_t l, size_t r) {
 
 // 快速排序
 template<typename T>
-void quickSort(vector <T> &q, size_t l, size_t r) {
+void quickSort(vector<T> &q, size_t l, size_t r) {
     if (l >= r)
         return;
-    size_t i = l - 1, j = r + 1, x = q[l + rand() % (r - l + 1)];
-    while (i < j) {
-        do j--; while (q[j] > x);
-        do i++; while (q[i] < x);
-        if (i < j)
+    size_t i = l, j = r;
+    T x = q[l + rand() % (r - l + 1)];
+    
+    while (i <= j) {
+        while (q[i] < x)
+            i++;
+        while (q[j] > x)
+            j--;
+        if (i <= j) {
             swap(q[i], q[j]);
-        else {
-            quickSort(q, l, j);
-            quickSort(q, j + 1, r);
+            i++;
+            j--;
         }
     }
+    
+    quickSort(q, l, j);
+    quickSort(q, i, r);
 }
 
 // 计数排序

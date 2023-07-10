@@ -95,6 +95,7 @@ public:
     }
     
     void setRoot(Node* node) {
+        Clear(this->root);
         this->root = node;
     }
 

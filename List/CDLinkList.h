@@ -26,6 +26,7 @@ public:
     // 析构函数
     ~CDLinkList() {
         Clear();
+        delete head;
     }
 
     // 清空链表
